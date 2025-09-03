@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: pedylo
+      MYSQL_USER: pedylo
+      MYSQL_PASSWORD: pedylopass
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
+
